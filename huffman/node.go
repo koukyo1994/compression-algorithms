@@ -5,7 +5,6 @@ func NewNode(char rune, freq uint64) Node {
 		Parent: nil,
 		Left:   nil,
 		Right:  nil,
-		Next:   nil,
 		Char:   char,
 		Freq:   freq,
 	}
