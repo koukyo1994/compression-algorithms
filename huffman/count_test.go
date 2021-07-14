@@ -20,14 +20,12 @@ func TestCountChars(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		file, err := os.Open(tt.filePath)
-		if err != nil {
-			t.Errorf("%s: Open: %v", tt.name, err)
-			continue
-		}
-		defer file.Close()
-
-		actual := huffman.CountChars(file)
-		assert.Equal(t, tt.expected, actual, "%s: CountChars", tt.name)
+		t.Run(tt.name, func(t *testing.T) {
+			file, err := os.Open(tt.filePath)
+			assert.Nil(t, err)
+			defer file.Close()
+			actual := huffman.CountChars(file)
+			assert.Equal(t, tt.expected, actual)
+		})
 	}
 }
