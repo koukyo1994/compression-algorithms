@@ -9,3 +9,11 @@ func NewNode(char rune, freq uint64) Node {
 		Freq:   freq,
 	}
 }
+
+func PrepareLeafNodes(charCounts map[rune]int) []Node {
+	var leafNodes []Node
+	for char, count := range charCounts {
+		leafNodes = append(leafNodes, NewNode(char, uint64(count)))
+	}
+	return leafNodes
+}
