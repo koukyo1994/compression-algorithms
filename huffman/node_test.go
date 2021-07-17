@@ -1,6 +1,7 @@
 package huffman_test
 
 import (
+	"container/heap"
 	"os"
 	"testing"
 
@@ -30,14 +31,14 @@ func TestPrepareLeafNodes(t *testing.T) {
 		expected []huffman.Node
 	}{
 		{"正常系/普通のファイル", "../testdata/normal.txt", []huffman.Node{
-			{nil, nil, nil, 4, 'a'},
-			{nil, nil, nil, 4, 'b'},
 			{nil, nil, nil, 1, 'c'},
+			{nil, nil, nil, 1, 'l'},
+			{nil, nil, nil, 1, '\n'},
 			{nil, nil, nil, 2, 'n'},
 			{nil, nil, nil, 3, 'i'},
-			{nil, nil, nil, 1, 'l'},
+			{nil, nil, nil, 4, 'a'},
+			{nil, nil, nil, 4, 'b'},
 			{nil, nil, nil, 4, ' '},
-			{nil, nil, nil, 1, '\n'},
 		}},
 		{"境界値/空ファイル", "../testdata/empty.txt", nil},
 	}
@@ -49,7 +50,19 @@ func TestPrepareLeafNodes(t *testing.T) {
 			defer file.Close()
 			charCounts := huffman.CountChars(file)
 			nodes := huffman.PrepareLeafNodes(charCounts)
-			assert.ElementsMatch(t, tt.expected, nodes, "%s: PrepareLeafNodes", tt.name)
+
+			expected := huffman.NodesHeap{}
+			for _, node := range tt.expected {
+				heap.Push(&expected, node)
+			}
+
+			assert.Equal(t, expected.Len(), nodes.Len(), "%s: Len", tt.name)
+			lenNodes := nodes.Len()
+			for i := 0; i < lenNodes; i++ {
+				actualNode := heap.Pop(&nodes).(huffman.Node)
+				expectedNode := heap.Pop(&expected).(huffman.Node)
+				assert.Equal(t, expectedNode.Freq, actualNode.Freq, "%s: Pop", tt.name)
+			}
 		})
 	}
 }

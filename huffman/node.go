@@ -1,5 +1,7 @@
 package huffman
 
+import "container/heap"
+
 func NewNode(char rune, freq uint64) Node {
 	return Node{
 		Parent: nil,
@@ -10,10 +12,10 @@ func NewNode(char rune, freq uint64) Node {
 	}
 }
 
-func PrepareLeafNodes(charCounts map[rune]int) []Node {
-	var leafNodes []Node
+func PrepareLeafNodes(charCounts map[rune]int) NodesHeap {
+	var leafNodes NodesHeap
 	for char, count := range charCounts {
-		leafNodes = append(leafNodes, NewNode(char, uint64(count)))
+		heap.Push(&leafNodes, NewNode(char, uint64(count)))
 	}
 	return leafNodes
 }
