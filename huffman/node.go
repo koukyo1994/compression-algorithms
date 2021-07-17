@@ -1,6 +1,8 @@
 package huffman
 
-import "container/heap"
+import (
+	"container/heap"
+)
 
 func NewNode(char rune, freq uint64) Node {
 	return Node{
