@@ -11,12 +11,12 @@ import (
 func TestNodesHeap(t *testing.T) {
 	tests := []struct {
 		name          string
-		nodes         []huffman.Node
+		nodes         []*huffman.Node
 		expectedFreqs []uint64
 	}{
 		{
 			"正常系",
-			[]huffman.Node{
+			[]*huffman.Node{
 				{Freq: 10, Char: 'a'},
 				{Freq: 20, Char: 'b'},
 				{Freq: 5, Char: 'c'},
@@ -36,7 +36,7 @@ func TestNodesHeap(t *testing.T) {
 			}
 
 			for i := 0; i < len(tt.nodes); i++ {
-				v := heap.Pop(nodesHeap).(huffman.Node)
+				v := heap.Pop(nodesHeap).(*huffman.Node)
 				assert.Equal(t, tt.expectedFreqs[i], v.Freq, "%s: NodesHeap", tt.name)
 			}
 		})

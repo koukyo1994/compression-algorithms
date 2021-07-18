@@ -6,16 +6,10 @@ type Node struct {
 	Right  *Node
 	Freq   uint64
 	Char   rune
+	Which  bool // true if left, false if right
 }
 
-type Code struct {
-	Char  rune
-	Value int
-	Bit   rune
-	Next  *Code
-}
-
-type NodesHeap []Node
+type NodesHeap []*Node
 
 func (h NodesHeap) Len() int {
 	return len(h)
@@ -30,7 +24,7 @@ func (h NodesHeap) Swap(i, j int) {
 }
 
 func (h *NodesHeap) Push(x interface{}) {
-	*h = append(*h, x.(Node))
+	*h = append(*h, x.(*Node))
 }
 
 func (h *NodesHeap) Pop() interface{} {
