@@ -19,6 +19,11 @@ func TestBuildCodeBook(t *testing.T) {
 			filePath:         "../testdata/normal.txt",
 			expectedNumCodes: 8,
 		},
+		{
+			name:             "正常系2",
+			filePath:         "../testdata/abcd.txt",
+			expectedNumCodes: 5,
+		},
 	}
 
 	for _, tt := range tests {
@@ -34,6 +39,7 @@ func TestBuildCodeBook(t *testing.T) {
 			codeBook := huffman.BuildCodeBook(tree)
 
 			t.Log(codeBook)
+			t.Log(charCounts)
 		})
 	}
 }
