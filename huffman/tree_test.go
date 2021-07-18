@@ -11,14 +11,14 @@ import (
 
 func TestBuildHuffmanTree(t *testing.T) {
 	tests := []struct {
-		name     string
-		filePath string
-		expected []uint64
+		name         string
+		filePath     string
+		expectedFreq []uint64
 	}{
 		{
 			name:     "正常系",
 			filePath: "../testdata/normal.txt",
-			expected: []uint64{
+			expectedFreq: []uint64{
 				1, 1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 7, 8, 12, 20,
 			},
 		},
@@ -34,11 +34,11 @@ func TestBuildHuffmanTree(t *testing.T) {
 
 			tree := huffman.BuildHuffmanTree(nodes)
 
-			assert.Equal(t, len(tt.expected), tree.Len(), "%s: BuildHuffmanTree", tt.name)
+			assert.Equal(t, len(tt.expectedFreq), tree.Len(), "%s: BuildHuffmanTree", tt.name)
 			lenTree := tree.Len()
 			for i := 0; i < lenTree; i++ {
-				node := heap.Pop(&tree).(huffman.Node)
-				assert.Equal(t, tt.expected[i], node.Freq, "%s: BuildHuffmanTree", tt.name)
+				node := heap.Pop(&tree).(*huffman.Node)
+				assert.Equal(t, tt.expectedFreq[i], node.Freq, "%s: BuildHuffmanTree", tt.name)
 			}
 		})
 	}
