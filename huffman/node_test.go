@@ -28,17 +28,17 @@ func TestPrepareLeafNodes(t *testing.T) {
 	tests := []struct {
 		name     string
 		filepath string
-		expected []huffman.Node
+		expected []*huffman.Node
 	}{
-		{"正常系/普通のファイル", "../testdata/normal.txt", []huffman.Node{
-			{nil, nil, nil, 1, 'c'},
-			{nil, nil, nil, 1, 'l'},
-			{nil, nil, nil, 1, '\n'},
-			{nil, nil, nil, 2, 'n'},
-			{nil, nil, nil, 3, 'i'},
-			{nil, nil, nil, 4, 'a'},
-			{nil, nil, nil, 4, 'b'},
-			{nil, nil, nil, 4, ' '},
+		{"正常系/普通のファイル", "../testdata/normal.txt", []*huffman.Node{
+			{nil, nil, nil, 1, 'c', false},
+			{nil, nil, nil, 1, 'l', false},
+			{nil, nil, nil, 1, '\n', false},
+			{nil, nil, nil, 2, 'n', false},
+			{nil, nil, nil, 3, 'i', false},
+			{nil, nil, nil, 4, 'a', false},
+			{nil, nil, nil, 4, 'b', false},
+			{nil, nil, nil, 4, ' ', false},
 		}},
 		{"境界値/空ファイル", "../testdata/empty.txt", nil},
 	}
@@ -59,8 +59,8 @@ func TestPrepareLeafNodes(t *testing.T) {
 			assert.Equal(t, expected.Len(), nodes.Len(), "%s: Len", tt.name)
 			lenNodes := nodes.Len()
 			for i := 0; i < lenNodes; i++ {
-				actualNode := heap.Pop(&nodes).(huffman.Node)
-				expectedNode := heap.Pop(&expected).(huffman.Node)
+				actualNode := heap.Pop(&nodes).(*huffman.Node)
+				expectedNode := heap.Pop(&expected).(*huffman.Node)
 				assert.Equal(t, expectedNode.Freq, actualNode.Freq, "%s: Pop", tt.name)
 			}
 		})

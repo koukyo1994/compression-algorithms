@@ -11,13 +11,15 @@ func NewNode(char rune, freq uint64) Node {
 		Right:  nil,
 		Char:   char,
 		Freq:   freq,
+		Which:  false,
 	}
 }
 
 func PrepareLeafNodes(charCounts map[rune]int) NodesHeap {
 	var leafNodes NodesHeap
 	for char, count := range charCounts {
-		heap.Push(&leafNodes, NewNode(char, uint64(count)))
+		node := NewNode(char, uint64(count))
+		heap.Push(&leafNodes, &node)
 	}
 	return leafNodes
 }
