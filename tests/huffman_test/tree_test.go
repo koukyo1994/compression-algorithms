@@ -17,7 +17,7 @@ func TestBuildHuffmanTree(t *testing.T) {
 	}{
 		{
 			name:     "正常系",
-			filePath: "../testdata/normal.txt",
+			filePath: "../../testdata/normal.txt",
 			expectedFreq: []uint64{
 				1, 1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 7, 8, 12, 20,
 			},

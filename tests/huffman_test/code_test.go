@@ -16,13 +16,13 @@ func TestBuildCodeBook(t *testing.T) {
 	}{
 		{
 			name:             "正常系",
-			filePath:         "../testdata/normal.txt",
+			filePath:         "../../testdata/normal.txt",
 			expectedNumCodes: 8,
 		},
 		{
 			name:             "正常系2",
-			filePath:         "../testdata/abcd.txt",
-			expectedNumCodes: 5,
+			filePath:         "../../testdata/abcd.txt",
+			expectedNumCodes: 4,
 		},
 	}
 
@@ -38,8 +38,7 @@ func TestBuildCodeBook(t *testing.T) {
 			tree := huffman.BuildHuffmanTree(nodes)
 			codeBook := huffman.BuildCodeBook(tree)
 
-			t.Log(codeBook)
-			t.Log(charCounts)
+			assert.Equal(t, tt.expectedNumCodes, len(codeBook), "%s: len(codeBook)", tt.name)
 		})
 	}
 }

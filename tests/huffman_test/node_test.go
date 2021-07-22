@@ -30,17 +30,17 @@ func TestPrepareLeafNodes(t *testing.T) {
 		filepath string
 		expected []*huffman.Node
 	}{
-		{"正常系/普通のファイル", "../testdata/normal.txt", []*huffman.Node{
-			{nil, nil, nil, 1, 'c', false},
-			{nil, nil, nil, 1, 'l', false},
-			{nil, nil, nil, 1, '\n', false},
-			{nil, nil, nil, 2, 'n', false},
-			{nil, nil, nil, 3, 'i', false},
-			{nil, nil, nil, 4, 'a', false},
-			{nil, nil, nil, 4, 'b', false},
-			{nil, nil, nil, 4, ' ', false},
+		{"正常系/普通のファイル", "../../testdata/normal.txt", []*huffman.Node{
+			{Parent: nil, Left: nil, Right: nil, Freq: 1, Char: 'c', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 1, Char: 'l', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 1, Char: '\n', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 2, Char: 'n', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 3, Char: 'i', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 4, Char: 'a', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 4, Char: 'b', Which: false},
+			{Parent: nil, Left: nil, Right: nil, Freq: 4, Char: ' ', Which: false},
 		}},
-		{"境界値/空ファイル", "../testdata/empty.txt", nil},
+		{"境界値/空ファイル", "../../testdata/empty.txt", nil},
 	}
 
 	for _, tt := range tests {
