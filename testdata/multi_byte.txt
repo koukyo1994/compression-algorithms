@@ -1,0 +1,2 @@
+This is a sentence with multi-byte letters💀.
+このファイルはマルチバイト文字を含みます😇。
