@@ -1,5 +1,29 @@
 package runlength
 
+import "fmt"
+
 func Encode(lines string) string {
-	return lines
+	var prev rune
+	var count int
+	result := ""
+	for pos, c := range lines {
+		if c == prev {
+			count++
+		} else {
+			if pos == 0 {
+			} else if count > 1 {
+				result += string(prev) + fmt.Sprint(count)
+			} else {
+				result += string(prev)
+			}
+			count = 1
+			prev = c
+		}
+	}
+	if count > 1 {
+		result += string(prev) + fmt.Sprint(count)
+	} else {
+		result += string(prev)
+	}
+	return result
 }
