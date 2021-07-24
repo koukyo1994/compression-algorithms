@@ -1,6 +1,9 @@
 package runlength
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+)
 
 func Encode(lines string) string {
 	var prev rune
@@ -26,4 +29,12 @@ func Encode(lines string) string {
 		result += string(prev)
 	}
 	return result
+}
+
+func RunLengthEncode(inPath string, outPath string) error {
+	buffer, err := ioutil.ReadFile(inPath)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(outPath, []byte(Encode(string(buffer))), 0644)
 }
